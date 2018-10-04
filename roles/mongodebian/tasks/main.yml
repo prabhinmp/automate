@@ -14,3 +14,8 @@
    service:
      name: mongod
      state: started
+- name: enable mongodb service
+  service:
+    name: mongod
+    state: enabled
+    
