@@ -8,7 +8,7 @@
     repo: deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.4 multiverse
     state: present
     filename: mongodb-org-3.4
-- name: Update repositories cache and install "foo" package
-  apt:
+ - name: Update repositories cache and install "mongodb" package
+   apt:
     name: mongodb-org state=present
     update_cache: yes
