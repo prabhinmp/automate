@@ -9,6 +9,4 @@
     state: present
     filename: mongodb-org-3.4
  - name: Update repositories cache and install "mongodb" package
-   apt:
-    pkg: mongodb state=present
-    update_cache: yes
+   apt: pkg=mongodb-org state=present update_cache=true
