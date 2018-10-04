@@ -1,4 +1,4 @@
 ---
 # handlers file for mongodebian
  - name: start mysql
-   service: name=mongod state=started
+   service: name=mongod state=restarted
