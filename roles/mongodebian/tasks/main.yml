@@ -1,2 +1,10 @@
 ---
 # tasks file for mongodebian
+ - name: add Mongodb GPG key
+   apt_key:
+     keyserver: keyserver.ubuntu.com
+     id: 7F0CEB10
+ - apt_repository:
+    repo: deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.4 multiverse
+    state: present
+    filename: mongodb-org-3.4
