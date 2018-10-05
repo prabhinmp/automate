@@ -3,7 +3,7 @@
  - name: copy the rpm file /tmp
    copy: src=files/epel-release-6-8.noarch.rpm dest=/tmp/epel-release-6-8.noarch.rpm
  - name: install downloaded files
-  yum: name=/tmp/epel-release-6-8.noarch.rpm state=installed
+   yum: name=/tmp/epel-release-6-8.noarch.rpm state=installed
  - name: install redis keyserver
    yum: name=redis state=installed
    notify:
