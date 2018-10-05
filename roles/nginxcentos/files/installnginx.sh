@@ -33,6 +33,7 @@ make install
 cd ..
 
 #install
+sudo rpm -Uvh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
 sudo yum -y install libpcap libpcap-devel libnet libnet-devel pcre pcre-devel gcc gcc-c++ automake autoconf libtool make libyaml libyaml-devel zlib zlib-devel file-devel
 yum -y install GeoIP-devel GeoIP
 
