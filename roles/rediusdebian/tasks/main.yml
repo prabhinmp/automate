@@ -1,2 +1,8 @@
 ---
 # tasks file for rediusdebian
+ - name: Update repositories cache and install "mongodb" package
+   apt: name=redis-server state=present update_cache=true
+ - name: Start service redis, if not started
+   service:
+     name: redis-server
+     state: started
