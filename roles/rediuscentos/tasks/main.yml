@@ -5,6 +5,6 @@
  - name: install downloaded files
    yum: name=/tmp/epel-release-6-8.noarch.rpm state=installed
  - name: install redis keyserver
-   yum: name=redis state=installed
+   yum: name=redis state=installed enabled=yes
    notify:
      - start redis
