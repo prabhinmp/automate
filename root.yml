@@ -1,0 +1,9 @@
+---
+- hosts: local
+become: yes
+vars:
+password: $6$MV2RsC9s$7OIU2GPqG9aXt5BcgTAKXqb0Vne3G0OcD/AknckEa.Ceoi1AzPHXbKRVmwzIxJ2/hLZvyDFuf0lmzNvq6hZXp.
+
+tasks:
+– name: Change root password
+  user: name=root update_password=always password={{password}}
