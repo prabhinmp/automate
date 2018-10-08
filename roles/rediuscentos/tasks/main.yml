@@ -9,6 +9,6 @@
  - name: Ansible Template Example
    template:
     src: redis.j2
-    dest: /etc/redis/redis.conf
+    dest: /etc/redis.conf
    notify:
      - start redis
