@@ -1,0 +1,22 @@
+---
+# tasks file for mongodebian
+ - name: add Mongodb GPG key
+   apt_key:
+     keyserver: keyserver.ubuntu.com
+     id: 9DA31620334BD75D9DCB49F368818C72E52529D4
+ - apt_repository:
+    repo: deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/4.0 multiverse
+    state: present
+    filename: mongodb-org-4.0.list
+ - name: Update repositories cache and install "mongodb" package
+   apt: name=mongodb-org state=present update_cache=true
+ - name: remove a file
+   file:
+     path: /etc/mongod.conf
+     state: absent
+ - name: mongo conf copy
+   template:
+    src: mongod.j2
+    dest: /etc/mongod.conf
+   notify:
+   - start
