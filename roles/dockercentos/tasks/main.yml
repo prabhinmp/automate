@@ -1,0 +1,4 @@
+---
+# tasks file for dockercentos
+- name: Install docker package in centos7
+  yum : name=docker update_cache=yes enabled=yes state=started
