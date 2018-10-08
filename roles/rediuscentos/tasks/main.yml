@@ -6,9 +6,15 @@
    yum: name=/tmp/epel-release-6-8.noarch.rpm state=installed
  - name: install redis keyserver
    yum: name=redis state=installed
+ - name: remove redis default file
+   file:
+     path: /etc/redis.conf
+     state: absent
  - name: redis conf copy
    template:
     src: redis.j2
     dest: /etc/redis.conf
- - name: restart redis service
-   service: name=redis state=restarted
+   notify:
+   - start
+# - name: restart redis service
+#   service: name=redis state=restarted

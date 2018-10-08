@@ -2,6 +2,10 @@
 # tasks file for rediusdebian
  - name: Update repositories cache and install "redis server" package
    apt: name=redis-server state=present update_cache=true
+ - name: remove a file
+   file:
+     path: /etc/mongod.conf
+     state: absent
  - name: Ansible Template Example
    template:
     src: redis.j2

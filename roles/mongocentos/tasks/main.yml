@@ -4,6 +4,14 @@
    copy: src=files/mongodb-org-3.6.repo dest=/etc/yum.repos.d/mongodb-org-3.6.repo
  - name: Install mongodb
    yum: name=mongodb-org state=latest
- - name: start and enable the state
-   service: name=mongod state=restarted enabled=yes
+ - name: remove mongod default a file
+   file:
+     path: /etc/mongod.conf
+     state: absent
+ - name: mongod conf copy
+   template:
+    src: mongod.j2
+    dest: /etc/mongod.conf
+   notify:
+   - start
 
