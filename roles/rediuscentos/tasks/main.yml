@@ -5,7 +5,7 @@
 # - name: install downloaded files
 #:Wq   yum: name=/tmp/epel-release-6-8.noarch.rpm state=installed
  - name: install redis keyserver
-   yum: name=redis state=installed enabled=yes
+   yum: name=redis state=installed
  - name: Ansible Template Example
    template:
     src: redis.j2
