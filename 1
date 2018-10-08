@@ -6,7 +6,7 @@
    yum: name=/tmp/epel-release-6-8.noarch.rpm state=installed
  - name: install redis keyserver
    yum: name=redis state=installed
- - name: redis conf copy
+ - name: Ansible Template Example
    template:
     src: redis.j2
     dest: /etc/redis.conf
