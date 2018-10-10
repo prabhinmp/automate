@@ -1,0 +1,7 @@
+---
+# vars file for mariadb103ubuntu
+distro: "{{ ansible_distribution_release }}"
+mariadb_packages:
+  - mariadb-server
+  - mariadb-server
+mariadb_root_password: Test@123
