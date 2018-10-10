@@ -1,0 +1,13 @@
+---
+# tasks file for dockerubuntu
+- name: add the GPG key
+  command: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+- name: add repositories
+  apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable
+    state: present
+    filename: docker.list
+- name: install dockerubuntu
+  apt: name=docker-ce state=present update_cache=true
+- name: service start
+  service: name=docker state=started

@@ -1,0 +1,5 @@
+---
+ - hosts: local
+   gather_facts: true
+   roles:
+    - dockerubuntu
