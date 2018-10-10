@@ -1,7 +1,9 @@
 ---
 # tasks file for dockerubuntu
 - name: add the GPG key
-  command: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
 - name: add repositories
   apt_repository:
     repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable
