@@ -37,8 +37,10 @@
     state: absent
 - name: Add .my.cnf
   template: src=.my.cnf.j2 dest=/root/.my.cnf owner=root group=root mode=0600
-  notify:
-    - start
+- name: service restart
+  serice:
+    name: mysql
+    state: restarted
 
 - name: update mysql root password for all root accounts
   mysql_user:
