@@ -42,7 +42,7 @@
 - name: serice restart
   service:
     name: mysql
-    state: reloaded
+    state: restarted
 
 - name: update mysql root password for all root accounts
   mysql_user:
