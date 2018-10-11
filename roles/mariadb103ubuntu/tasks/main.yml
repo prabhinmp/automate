@@ -35,10 +35,10 @@
   file:
     path: /root/.my.cnf
     state: absent
-- name: Add .my.cnf
-  template: src=.my.cnf.j2 dest=/root/.my.cnf owner=root group=root mode=0600
-  notify:
-    - start
+#- name: Add .my.cnf
+#  template: src=.my.cnf.j2 dest=/root/.my.cnf owner=root group=root mode=0600
+#  notify:
+#    - start
 - name: serice restart
   service:
     name: mysql
@@ -46,15 +46,18 @@
 
 - name: update mysql root password for all root accounts
   mysql_user:
-    name: root
-    host: "{{ item }}"
-    password: "{{ mariadb_root_password }}"
-    priv: "*.*:ALL,GRANT"
-  with_items:
-    - "{{ ansible_hostname }}"
-    - 127.0.0.1
-    - ::1
-    - localhost
+      name: root
+      host: "{{ item }}"
+      password: "{{ mariadb_root_password }}"
+      login_user: root
+      login_password: "{{ mariadb_root_password }}"
+      check_implicit_admin: yes
+      priv: "*.*:ALL,GRANT"
+    with_items:
+      - "{{ ansible_hostname }}"
+      - 127.0.0.1
+      - ::1
+      - localhost
 
 #  notify:
 #    - start
