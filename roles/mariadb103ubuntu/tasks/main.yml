@@ -31,6 +31,10 @@
   with_items: "{{mariadb_packages}}"
   notify:
     - start
+- name: remove .my.cnf if existing
+  file:
+    path: /root/.my.cnf
+    state: absent
 - name: Add .my.cnf
   template: src=.my.cnf.j2 dest=/root/.my.cnf owner=root group=root mode=0600
   notify:
