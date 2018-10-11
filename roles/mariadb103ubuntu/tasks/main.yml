@@ -31,7 +31,7 @@
   notify:
     - start
 - name: Add .my.cnf
-  template: src=my.cnf.j2 dest=/root/.my.cnf owner=root group=root mode=0600
+  template: src=.my.cnf.j2 dest=/root/.my.cnf owner=root group=root mode=0600
 
 # Set root password
 # UPDATE mysql.user SET Password=PASSWORD('mysecret') WHERE User='root';
