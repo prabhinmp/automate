@@ -37,14 +37,16 @@
       login_password: "{{ mariadb_root_password}}"
       check_implicit_admin: yes
       name: root
-      host: "{{ item }}"
+      host_all: yes
+    #  host: "{{ item }}"
+
       password: "{{ mariadb_root_password }}"
       state: present
-  with_items:
-      - ::1
-      - localhost
-      - 127.0.0.1
-      - %
+#  with_items:
+#      - ::1
+#      - localhost
+#      - 127.0.0.1
+#      - '%'
 
 - name: replace bind address
   lineinfile:
