@@ -50,5 +50,7 @@
     dest: /etc/mysql/my.cnf
     regexp: '^(.*)bind-address(.*)$'
     line: bind-address            = {{ ansible_default_ipv4.address }}
+    backrefs: yes
+  become: true
   notify:
     - start

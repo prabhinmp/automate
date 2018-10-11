@@ -2,4 +2,4 @@
 # handlers file for mariadb103ubuntu
 - name: start
   service:
-    name: mysql state=started
+    name: mysql state=restarted
