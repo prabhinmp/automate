@@ -1,6 +1,7 @@
 ---
 # vars file for mariadb103ubuntu
 distro: "{{ ansible_distribution_release }}"
+localip: "{{ ansible_default_ipv4.address }}"
 mariadb_packages:
   - mariadb-server
   - mariadb-client
