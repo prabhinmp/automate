@@ -6,3 +6,6 @@ mariadb_packages:
   - mariadb-server
   - python-mysqldb
 mariadb_root_password: Test@123
+remove_package:
+  - mysql
+  - mysql*
