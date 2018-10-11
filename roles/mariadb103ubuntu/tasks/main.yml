@@ -1,5 +1,7 @@
 ---
 # tasks file for mariadb103ubuntu
+-name: install dependency package
+ aptt: name=software-properties-common state=installed update_cache=true
 - name: add the GPG key
   apt_key:
     keyserver: keyserver.ubuntu.com
@@ -13,6 +15,7 @@
   package:
     name: "{{ item }}"
     state: installed
+    update_cache: true
   with_items: "{{mariadb_packages}}"
   notify:
     - start
