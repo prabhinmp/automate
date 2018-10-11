@@ -8,7 +8,7 @@
     id: 0xF1656F24C74CD1D8
 - name: add repositories
   apt_repository:
-    repo: deb https://mirrors.evowise.com/mariadb/repo/10.1/ubuntu {{ distro }}' main
+    repo: deb [arch=amd64,arm64,i386,ppc64el] http://ftp.kaist.ac.kr/mariadb/repo/10.3/ubuntu xenial main
     state: present
     filename: mariadb
 - name: install mariadb 10.3 in ubuntu
