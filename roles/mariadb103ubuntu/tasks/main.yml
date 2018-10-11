@@ -18,6 +18,10 @@
     repo: deb [arch=amd64,arm64,i386,ppc64el] http://ftp.kaist.ac.kr/mariadb/repo/10.3/ubuntu xenial main
     state: present
     filename: mariadb
+- name: Set MySQL root password before installing
+    debconf: name='mysql-server' question='mysql-server/root_password' value='{{mariadb_root_password | quote}}' vtype='password'
+- name: Confirm MySQL root password before installing
+    debconf: name='mysql-server' question='mysql-server/root_password_again' value='{{mariadb_root_password | quote}}' vtype='password'
 - name: install mariadb 10.3 in ubuntu
   package:
     name: "{{ item }}"
@@ -32,14 +36,14 @@
 #  changed_when: false
 #  failed_when: false
 #  register: root_pwd_check
-- name: copy .my.cnf file which contains root user passowrd
-  template:
-    src: .my.cnf.j2
-    dest: /root/.my.cnf
-    owner: root
-    mode: 0600
-  notify:
-    - start
+#- name: copy .my.cnf file which contains root user passowrd
+#  template:
+#    src: .my.cnf.j2
+#    dest: /root/.my.cnf
+#    owner: root
+#    mode: 0600
+#  notify:
+#    - start
 #- name: Set MariaDB root password for the first time (root@localhost)
 #  mysql_user:
 #    name: root
@@ -58,4 +62,4 @@
   with_items:
     - ::1
     - 127.0.0.1
-  when: root_pwd_check.rc == 0
+#  when: root_pwd_check.rc == 0
