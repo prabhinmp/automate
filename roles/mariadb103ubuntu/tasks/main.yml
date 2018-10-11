@@ -28,6 +28,8 @@
     state: present
     update_cache: true
   with_items: "{{mariadb_packages}}"
+  notify:
+    - start
 #  notify:
 #    - start
 #- name: Check if root password is set
