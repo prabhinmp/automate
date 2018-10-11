@@ -1,11 +1,11 @@
 ---
 # tasks file for mariadb103ubuntu
 - name: install dependency package
-  apt: name=software-properties-common state=installed update_cache=true
+  apt: name=software-properties-common state=present update_cache=true
 - name: add the GPG key
   apt_key:
-    keyserver: keyserver.ubuntu.com
-    id: 0xF1656F24C74CD1D8
+    url: http://ftp.kaist.ac.kr/mariadb//mariadb-10.3.8/repo/ubuntu/dists/xenial/Release.gpg
+    state: present
 - name: add repositories
   apt_repository:
     repo: deb [arch=amd64,arm64,i386,ppc64el] http://ftp.kaist.ac.kr/mariadb/repo/10.3/ubuntu xenial main
