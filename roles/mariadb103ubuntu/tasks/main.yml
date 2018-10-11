@@ -20,9 +20,9 @@
     state: present
     filename: mariadb
 - name: Set MySQL root password before installing
-  command: debconf-set-selections <<< 'mariadb-server-10.3 mysql-server/root_password password {{mariadb_root_password}}'
+  command: debconf-set-selections <<< 'mariadb-server-10.3 mysql-server/root_password password {{ mariadb_root_password }}'
 - name: Confirm MySQL root password before installing
-  command: debconf-set-selections <<< 'mariadb-server-10.3 mysql-server/root_password_again password {{mariadb_root_password}}'
+  command: debconf-set-selections <<< 'mariadb-server-10.3 mysql-server/root_password_again password {{ mariadb_root_password }}'
 - name: install mariadb 10.3 in ubuntu
   package:
     name: "{{ item }}"
@@ -31,32 +31,19 @@
   with_items: "{{mariadb_packages}}"
   notify:
     - start
-- name: remove .my.cnf if existing
-  file:
-    path: /root/.my.cnf
-    state: absent
-#- name: Add .my.cnf
-#  template: src=.my.cnf.j2 dest=/root/.my.cnf owner=root group=root mode=0600
-#  notify:
-#    - start
-- name: Copy the root credentials as .my.cnf file
-  template: src=.my.cnf.j2 dest=~/.my.cnf mode=0600
 - name: Update MySQL root password for all root accounts
-  mysql_user: name=root host={{ item }} password={{ mariadb_root_password }} state=present
+  mysql_user:
+      login_user: root
+      login_password: "{{ mariadb_root_password}}"
+      check_implicit_admin: yes
+      name: root
+      host: "{{ item }}"
+      password: "{{ mariadb_root_password }}"
+      state: present
   with_items:
-     - "{{ ansible_hostname }}"
-     - 127.0.0.1
-     - ::1
-     - localhost
-
-
-
-- name: Ensure Anonymous user(s) are not in the database
-  mysql_user: name='' host={{ item }} state=absent
-  with_items:
-     - localhost
-     - "{{ ansible_hostname }}"
-
+      - ::1
+      - localhost
+      - 127.0.0.1
 
 #  notify:
 #    - start
