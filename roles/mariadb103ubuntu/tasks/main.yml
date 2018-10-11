@@ -2,6 +2,7 @@
 # tasks file for mariadb103ubuntu
 - name: check mysql already installed or not
   command: mysql --version
+  ignore_errors: true
   register: mysql_exist
 - name: remove existing mysql
   package:
