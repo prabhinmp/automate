@@ -19,9 +19,9 @@
     state: present
     filename: mariadb
 - name: Set MySQL root password before installing
-  debconf: name='mysql-server' question='mariadb-server/root_password' value='{{mariadb_root_password | quote}}' vtype='password'
+  command: debconf-set-selections <<< 'mariadb-server-10.3 mysql-server/root_password password {{mariadb_root_password}}'
 - name: Confirm MySQL root password before installing
-  debconf: name='mysql-server' question='mariadb-server/root_password_again' value='{{mariadb_root_password | quote}}' vtype='password'
+  command: debconf-set-selections <<< 'mariadb-server-10.3 mysql-server/root_password_again password {{mariadb_root_password}}'
 - name: install mariadb 10.3 in ubuntu
   package:
     name: "{{ item }}"
