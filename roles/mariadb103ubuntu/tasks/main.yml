@@ -39,6 +39,7 @@
     state: present
   with_items:
     - ::1
+    - '%'
     - localhost
     - 127.0.0.1
 #- name: remove anonymous users
