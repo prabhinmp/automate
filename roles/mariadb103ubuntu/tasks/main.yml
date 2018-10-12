@@ -42,11 +42,10 @@
     - localhost
     - '%'
     - 127.0.0.1
-- name: remove
-  mysql_user:
-    name: ''
-    host_all: yes
-    state: absent
+- name: remove blanl
+  command: 'mysql -NBe "DELETE FROM mysql.user WHERE user='' or password=''"'
+- name: flsuh privilges
+  command: 'mysql -NBe "flush privilges"'
 
 #  notify:
 #    - start
