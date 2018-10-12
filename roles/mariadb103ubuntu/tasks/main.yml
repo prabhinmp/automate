@@ -29,16 +29,16 @@
     state: present
     update_cache: true
   with_items: "{{mariadb_packages}}"
-  notify:
-    - start
-- name: Update MySQL root password for all root accounts
-  mysql_user:
-      login_user: root
-      login_password: "{{ mariadb_root_password}}"
-      check_implicit_admin: yes
-      name: root
-      host_all: yes
-    #  host: "{{ item }}"
+#  notify:
+#    - start
+#- name: Update MySQL root password for all root accounts
+#  mysql_user:
+#      login_user: root
+#      login_password: "{{ mariadb_root_password}}"
+#      check_implicit_admin: yes
+#      name: root
+#      host_all: yes
+#    #  host: "{{ item }}"
 
       password: "{{ mariadb_root_password }}"
       state: present
