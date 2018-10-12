@@ -33,9 +33,13 @@
   mysql_user:
     name: root
     password: "{{ mariadb_root_password }}"
-    host_all: yes
+    host: "{{ item }}"
     priv: '*.*:ALL,GRANT'
     state: present
+  with_items:
+    - ::1
+    - localhost
+    - 127.0.0.1
 #  notify:
 #    - start
 #- name: Update MySQL root password for all root accounts
