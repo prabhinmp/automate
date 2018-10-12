@@ -46,7 +46,7 @@
               password="{{ mariadb_root_password }}"
               check_implicit_admin=yes
               login_user="root"
-              login_password=""
+              login_password="{{ mariadb_root_password }}"
               state=present
 #  notify:
 #    - start
