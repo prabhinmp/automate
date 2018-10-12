@@ -29,6 +29,13 @@
     state: present
     update_cache: true
   with_items: "{{mariadb_packages}}"
+- name: mysql root user Creatation
+  mysql_user:
+    name: root
+    password: {{ mariadb_root_password }}
+    host_all: yes
+    priv: '*.*:ALL,GRANT'
+    state: present
 #  notify:
 #    - start
 #- name: Update MySQL root password for all root accounts
