@@ -7,6 +7,7 @@
 - name: remove existing mysql
   package:
     name: "{{ item }}"
+    purge: yes
     state: absent
   with_items: "{{remove_package}}"
   when: mysql_exist.rc == 0
