@@ -43,7 +43,7 @@
     - '%'
     - 127.0.0.1
 - name: remove
-- mysql_user:
+  mysql_user:
     name: ''
     host_all: yes
     state: absent
