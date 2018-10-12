@@ -23,6 +23,12 @@
 #  command: debconf-set-selections <<< 'mariadb-server-10.3 mysql-server/root_password password {{ mariadb_root_password }}'
 #- name: Confirm MySQL root password before installing
 #  command: debconf-set-selections <<< 'mariadb-server-10.3 mysql-server/root_password_again password {{ mariadb_root_password }}'
+- name: install mariadb 10.3 in ubuntu
+  package:
+    name: "{{ item }}"
+    state: present
+    update_cache: true
+  with_items: "{{mariadb_packages}}"
 - name: update mysql root password for all root accounts
   mysql_user: name=root host=localhost password="{{ mariadb_root_password }}"
 
@@ -43,6 +49,18 @@
 
 - name: remove the test database
   mysql_db: name=test state=absent
+
+- name: replace bind address
+  lineinfile:
+    dest: /etc/mysql/my.cnf
+    regexp: '^(.*)bind-address(.*)$'
+    line: bind-address            = {{ ansible_default_ipv4.address }}
+    backrefs: yes
+  become: true
+  notify:
+    - start
+
+
 
 - name: replace bind address
   lineinfile:
