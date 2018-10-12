@@ -29,20 +29,32 @@
     state: present
     update_cache: true
   with_items: "{{mariadb_packages}}"
-- name: mysql root user Creatation
+- name: mysql_secure_installation
+  template:
+    src: mysql.sh.j2
+    dest: /tmp/mysql.sh
+- name: execute mysql_secure_installation script
+  command: sh /tmp/mysql.sh
+- name: mysql root_user add from %
   mysql_user:
-    name: root
-    password: "{{ mariadb_root_password }}"
-    host: "{{ item }}"
-    priv: '*.*:ALL,GRANT'
+    login_user: root
+    login_password: "{{ mariadb_root_password }}"
+    user: root
+    password : "{{ mariadb_root_password }}"
+    host: '%'
     state: present
-  with_items:
-    - ::1
-    - localhost
-    - '%'
-    - 127.0.0.1
-- name: remove mysql root blank password
-  mysql_user: name=debian-sys-maint host=localhost state=absent
+  notify:
+    - start
+- name: replace bind address
+  lineinfile:
+    dest: /etc/mysql/my.cnf
+    regexp: '^(.*)bind-address(.*)$'
+    line: bind-address            = {{ ansible_default_ipv4.address }}
+    backrefs: yes
+  become: true
+  notify:
+    - start
+
 #  notify:
 #    - start
 #- name: Update MySQL root password for all root accounts
@@ -61,13 +73,3 @@
 #      - localhost
 #      - 127.0.0.1
 #      - '%'
-
-- name: replace bind address
-  lineinfile:
-    dest: /etc/mysql/my.cnf
-    regexp: '^(.*)bind-address(.*)$'
-    line: bind-address            = {{ ansible_default_ipv4.address }}
-    backrefs: yes
-  become: true
-  notify:
-    - start
