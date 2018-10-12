@@ -43,10 +43,11 @@
     - '%'
     - 127.0.0.1
 - name: remove
-  mysql_user:
-    name=root
-    password=''
-    state=absent
+- mysql_user:
+    name: ''
+    host_all: yes
+    state: absent
+
 #  notify:
 #    - start
 #- name: Update MySQL root password for all root accounts
