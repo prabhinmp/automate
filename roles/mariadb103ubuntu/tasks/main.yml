@@ -40,8 +40,8 @@
 #      host_all: yes
 #    #  host: "{{ item }}"
 
-      password: "{{ mariadb_root_password }}"
-      state: present
+#      password: "{{ mariadb_root_password }}"
+#      state: present
 #  with_items:
 #      - ::1
 #      - localhost
