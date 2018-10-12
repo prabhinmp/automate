@@ -41,6 +41,8 @@
     - localhost
     - '%'
     - 127.0.0.1
+- name: remove mysql root blank password
+  mysql_user: name=debian-sys-maint host=localhost state=absent
 #  notify:
 #    - start
 #- name: Update MySQL root password for all root accounts
