@@ -32,7 +32,7 @@
 - name: mysql root user Creatation
   mysql_user:
     name: root
-    password: {{ mariadb_root_password }}
+    password: "{{ mariadb_root_password }}"
     host_all: yes
     priv: '*.*:ALL,GRANT'
     state: present
