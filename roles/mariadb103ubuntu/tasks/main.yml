@@ -19,10 +19,10 @@
     repo: deb [arch=amd64,arm64,i386,ppc64el] http://ftp.kaist.ac.kr/mariadb/repo/10.3/ubuntu xenial main
     state: present
     filename: mariadb
-- name: Set MySQL root password before installing
-  command: debconf-set-selections <<< 'mariadb-server-10.3 mysql-server/root_password password {{ mariadb_root_password }}'
-- name: Confirm MySQL root password before installing
-  command: debconf-set-selections <<< 'mariadb-server-10.3 mysql-server/root_password_again password {{ mariadb_root_password }}'
+#- name: Set MySQL root password before installing
+#  command: debconf-set-selections <<< 'mariadb-server-10.3 mysql-server/root_password password {{ mariadb_root_password }}'
+#- name: Confirm MySQL root password before installing
+#  command: debconf-set-selections <<< 'mariadb-server-10.3 mysql-server/root_password_again password {{ mariadb_root_password }}'
 - name: install mariadb 10.3 in ubuntu
   package:
     name: "{{ item }}"
