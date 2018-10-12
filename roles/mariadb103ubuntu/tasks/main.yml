@@ -7,7 +7,6 @@
 - name: remove existing mysql
   package:
     name: "{{ item }}"
-    purge: yes
     state: absent
   with_items: "{{remove_package}}"
   when: mysql_exist.rc == 0
@@ -39,33 +38,11 @@
     state: present
   with_items:
     - ::1
-    - '%'
     - localhost
+    - '%'
     - 127.0.0.1
-#- name: remove anonymous users
-#  mysql_user:
-#     name: ''
-#     host: localhost
-#     state: absent
-#- name: remove
-#  mysql_user:
-#     name: root
-#     password: ''
-#     state: absent
-#- name: remove test database
-#  mysql_db:
-#    name: test
-#    state: absent
-#  notify:
-#    - start
-#- name: create root@% users
-#  mysql_user:
-#    name: root
-#    host: '%'
-#    password: {{ mariadb_root_password }}
-
-
-
+- name: remove mysql root blank password
+  mysql_user: name=debian-sys-maint host=localhost state=absent
 #  notify:
 #    - start
 #- name: Update MySQL root password for all root accounts
@@ -85,12 +62,12 @@
 #      - 127.0.0.1
 #      - '%'
 
-#- name: replace bind address
-#  lineinfile:
-#    dest: /etc/mysql/my.cnf
-#    regexp: '^(.*)bind-address(.*)$'
-#    line: bind-address            = {{ ansible_default_ipv4.address }}
-#    backrefs: yes
-#  become: true
-#  notify:
-#    - start
+- name: replace bind address
+  lineinfile:
+    dest: /etc/mysql/my.cnf
+    regexp: '^(.*)bind-address(.*)$'
+    line: bind-address            = {{ ansible_default_ipv4.address }}
+    backrefs: yes
+  become: true
+  notify:
+    - start
