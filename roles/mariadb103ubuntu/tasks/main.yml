@@ -40,13 +40,25 @@
   with_items:
     - ::1
     - localhost
-    - '%'
     - 127.0.0.1
-- name: remove blanl
+- name: remove anonymous users
   mysql_user:
-    name: debian-sys-maint
-    host: localhost
+     name: ''
+     host: localhost
+     state: absent
+- name: remove
+  mysql_user:
+     name: root
+     password: ''
+     state: absent
+- name: remove test database
+  mysql_db:
+    name: test
     state: absent
+  notify:
+    - start
+    
+
 
 #  notify:
 #    - start
