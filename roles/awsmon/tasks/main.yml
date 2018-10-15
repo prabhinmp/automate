@@ -22,7 +22,7 @@
     src: awscreds.conf.j2
     dest: /opt/aws-scripts-mon/awscreds.conf
 - name: add cronjob 
-  file:
+  copy:
     src: files/cloudwatch
     dest: /etc/cron.d/cloudwatch
     mode: 0644
