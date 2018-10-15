@@ -23,11 +23,8 @@
     dest: /opt/aws-scripts-mon/awscreds.conf
 - name: add cronjob 
   copy:
-    src: files/cloudwatch
+    src: files/cloudwatch.txt
     dest: /etc/cron.d/cloudwatch
-    mode: 644
-    owner: root
-    remote_src: yes
 - name: restart cron service
   service:
     name: cron
