@@ -1,0 +1,34 @@
+---
+# tasks file for awsmon
+- name: copy the awsmon python script to server
+  copy:
+    src: files/awsmon.zip
+    dest: /tmp/awsmon.zip
+- name: unzip the script
+  unarchive:
+     src: /tmp/awsmon.zip
+     dest: /opt/
+     remote_src: yes
+- name: install dependency packages
+  package:
+     name: "{{ item }}"
+     state: present
+     update_cache: yes
+  with_items:
+     - perl-DateTime
+     - perl-Switch
+     - perl-Sys-Syslog
+     - perl-LWP-Protocol-https
+     - perl-Digest-SHA
+- name: copy aws access and sceret key
+  template:
+    src: awscreds.conf.j2
+    dest: /opt/aws-scripts-mon/awscreds.conf
+- name: add cronjob 
+  copy:
+    src: files/cloudwatch.txt
+    dest: /etc/cron.d/cloudwatch
+- name: restart cron service
+  service:
+    name: cron
+    state: restarted

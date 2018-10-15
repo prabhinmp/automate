@@ -1,0 +1,5 @@
+---
+ - hosts: non
+   gather_facts: true
+   roles:
+    - awsmon
