@@ -26,7 +26,7 @@
     src: files/cloudwatch
     dest: /etc/cron.d/cloudwatch
     mode: 0644
-    user: root
+    owner: root
 - name: restart cron service
   service:
     name: cron
