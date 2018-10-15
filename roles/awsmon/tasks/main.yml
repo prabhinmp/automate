@@ -21,7 +21,6 @@
   template:
     src: awscreds.conf.j2
     dest: /opt/aws-scripts-mon/awscreds.conf
-    state: present
 - name: add cronjob 
   file:
     src: files/cloudwatch
