@@ -1,7 +1,7 @@
 ---
 # tasks file for awsmon
 - name: copy the awsmon python script to server
-  file:
+  copy:
     src: files/awsmon.zip
     dest: /tmp/awsmon.zip
 - name: unzip the script
