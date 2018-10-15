@@ -11,15 +11,16 @@
      remote_src: yes
 - name: install dependency packages
   package:
-     name: "{{ items }}"
+     name: "{{ item }}"
      state: present
+     update_cache: yes
   with_items:
      - libwww-perl
      - libdatetime-perl
 - name: copy aws access and sceret key
   template:
     src: awscreds.conf.j2
-    dest: /opt/awsmon/awscreds.conf
+    dest: /opt/aws-scripts-mon/awscreds.conf
     state: present
 - name: add cronjob 
   file:
