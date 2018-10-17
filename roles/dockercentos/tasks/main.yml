@@ -4,7 +4,6 @@
   yum :
     name: docker
     update_cache: yes
-    enabled: yes
     state: present
 - name: import login
   include_tasks: login.yml
