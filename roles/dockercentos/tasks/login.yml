@@ -1,0 +1,5 @@
+---
+  - name: docker login_user
+    docker_login:
+      username: {{dockerusername}}
+      password: {{dockerpassword}}
