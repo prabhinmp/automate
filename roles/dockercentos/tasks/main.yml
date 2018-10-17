@@ -3,7 +3,7 @@
 - name: Install docker package in centos7
   yum :
     name: docker
-    upda_cache: yes
+    update_cache: yes
     enabled: yes
     state: present
 - name: import login
