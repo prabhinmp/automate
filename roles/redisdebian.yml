@@ -1,5 +1,7 @@
 ---
  - hosts: local
+   become: true
+   become_user: root
+   become_method: sudo
    roles:
     - rediusdebian
-    - nginxdebian
