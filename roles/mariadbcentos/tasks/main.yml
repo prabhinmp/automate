@@ -1,2 +1,16 @@
 ---
 # tasks file for mariadbcentos
+- name: copy mariadb10.3 for centos6 repository
+  copy:
+    src: files/mariadb.repo
+    dest: /etc/yum.repos.d/mariadb.repo
+    state: present
+  register: repo
+- name: install mariadb 10.3 in centos6 or AWS ec2 AMI
+  package:
+    name: "{{ list }}"
+    state: present
+  with_items:
+    - MariaDB-server
+    - MariaDB-client
+  when: repo is succeeded
