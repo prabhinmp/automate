@@ -1,0 +1,11 @@
+---
+- name: check root password is set
+  shell: >
+    mysqladmin -u root status
+  register: check
+- name: set mariadb root password
+  mysql_user:
+     name: root
+     password: {{ rootpass }}
+  when: check.rc==0
+- name:
