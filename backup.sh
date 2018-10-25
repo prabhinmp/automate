@@ -20,5 +20,4 @@ else
     gzip  $backup/$mondate/access-1.$nowdate.log
     rm $backup/$mondate/access-1.$dayago.log
     rm $backup/$mondate/access-2.$dayago.log
-
 fi
