@@ -1,6 +1,6 @@
 #!/bin/bash
-datafolder="/data"
+remotedata="/data/"
 remoteserver="10.0.0.14"
-backupdirecory=/data
+localdata="/home/kpisoft/data"
 remoteuser="prabhin"
-rsync -azh $datafolder $remoteuser@$remoteserver:$backupdirecory
+rsync -avzh --delete -e ssh   $remoteuser@$remoteserver:$remotedata $localdata
