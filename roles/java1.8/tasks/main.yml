@@ -4,14 +4,14 @@
   get_url:
       url: "{{ site }}"
       headers: 'Cookie: oraclelicense=accept-securebackup-cookie'
-      dest: "{{ path }}"/jdk.tar.gz
+      dest: /tmp/jdk.tar.gz
 - name: make directory /usr/java
   file:
     path: /usr/java
     state: directory
 - name: extract downloaded package
   unarchive: 
-    src: "{{ path }}"/jdk.tar.gz
+    src: /tmp/jdk.tar.gz
     dest: /usr/java/
 - name: adding java environment path for all the users
   template:
