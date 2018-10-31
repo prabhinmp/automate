@@ -13,6 +13,7 @@
   unarchive: 
     src: /tmp/jdk.tar.gz
     dest: /usr/java/
+    remote_src: yes
 - name: adding java environment path for all the users
   template:
     src: java.sh.j2
