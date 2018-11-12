@@ -3,7 +3,7 @@ yum install -y wget gcc make tcl
 cd /tmp
 wget http://download.redis.io/releases/redis-5.0.0.tar.gz
 tar -xvzf redis-5.0.0.tar.gz
-cd redis-stable/
+cd redis-5.0.0/
 make
 make test
 make install
