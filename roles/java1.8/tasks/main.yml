@@ -1,0 +1,20 @@
+---
+# tasks file for java1.8
+- name: download java1.8 to temp folder
+  get_url:
+      url: "{{ site }}"
+      headers: 'Cookie: oraclelicense=accept-securebackup-cookie'
+      dest: /tmp/jdk.tar.gz
+- name: make directory /usr/java
+  file:
+    path: /usr/java
+    state: directory
+- name: extract downloaded package
+  unarchive: 
+    src: /tmp/jdk.tar.gz
+    dest: /usr/java/
+    remote_src: yes
+- name: adding java environment path for all the users
+  template:
+    src: java.sh.j2
+    dest: /etc/profile.d/java.sh
