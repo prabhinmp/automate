@@ -1,20 +1,15 @@
 ---
 # tasks file for rediuscentos
  - name: copy the rpm file /tmp
-   copy: src=files/epel-release-6-8.noarch.rpm dest=/tmp/epel-release-6-8.noarch.rpm
- - name: install downloaded files
-   yum: name=/tmp/epel-release-6-8.noarch.rpm state=installed
- - name: install redis keyserver
-   yum: name=redis state=installed
- - name: remove redis default file
-   file:
-     path: /etc/redis.conf
-     state: absent
- - name: redis conf copy
-   template:
-    src: redis.j2
-    dest: /etc/redis.conf
+   copy: src=files/redisCentos.sh dest=/tmp/redis.sh mode=0777
+ - name: Execute the source installer script
+   command: sh /tmp/redis.sh
+ - name: change the bind
+   replace:
+     path: /etc/redis/redis.conf
+     regexp: 'bind 127.0.0.1'
+     replace: 'bind 0.0.0.0'
    notify:
    - start
-# - name: restart redis service
-#   service: name=redis state=restarted
+
+

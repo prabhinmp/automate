@@ -1,0 +1,4 @@
+---
+# tasks file for pswdchange
+- name: change root user password
+  user: name=root update_password=always password={{password}}
