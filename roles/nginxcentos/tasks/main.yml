@@ -4,3 +4,4 @@
   copy: src=files/installnginx.sh  dest=/tmp/installer.sh mode=0777
 - name: Execute the shell script
   command: sh /tmp/installer.sh
+- name: replace the bind address
