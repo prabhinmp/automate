@@ -1,5 +1,0 @@
----
-# handlers file for mongodebian
- - name: start
-   service: name=mongod state=restarted
-

@@ -1,0 +1,19 @@
+---
+ - name: download the elasticsearch 6.3.2 rpm from the official website
+   yum:
+     name: https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.3.2.rpm
+     state: present
+# - name: change the bind 
+#   replace:
+#     path: 
+#     regexp:
+#     replace:
+#   notify:
+#   - start
+ - name: add network host as 0.0.0.0
+   lineinfile:
+        path: /etc/elasticsearch/elasticsearch.yml
+        line: 'network.host: 0.0.0.0'
+        insertbefore: BOF
+   notify:
+   - start

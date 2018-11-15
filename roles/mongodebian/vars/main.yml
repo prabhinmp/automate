@@ -1,5 +1,0 @@
----
-# vars file for mongodebian
- bind: 0.0.0.0
- localip: "{{ ansible_default_ipv4.address }}"
-

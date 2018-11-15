@@ -1,8 +1,0 @@
----
- - hosts: non
-   become: true
-   become_user: root
-   become_method: sudo
-   gather_facts: true
-   roles:
-    - mariadbcentos

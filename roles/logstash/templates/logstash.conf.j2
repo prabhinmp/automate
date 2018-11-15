@@ -1,0 +1,26 @@
+input {
+  tcp {
+    port => 5514
+    codec => json_lines
+  }
+}
+
+filter {
+  mutate {
+    remove_field => [ "@version", "@metdata", "logstash" ]
+  }
+}
+
+output {
+  if [stack_trace] {
+    elasticsearch {
+      hosts => [ "{{ elasticIP }}" ]
+      index => "my-error-%{+YYYY.MM.dd}"
+    }
+  } else {
+    elasticsearch {
+      hosts => [ "{{ elasticIP }}" ]
+      index => "my-app-%{+YYYY.MM.dd}"
+    }
+  }
+}
