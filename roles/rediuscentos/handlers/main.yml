@@ -1,4 +1,0 @@
----
-# handlers file for rediuscentos
- - name: start
-   service: name=redis state=restarted
