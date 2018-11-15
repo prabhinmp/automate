@@ -1,6 +1,6 @@
 ---
  - name: download the logstash 6.3.2 rpm from the official website
-   yum:
+   apt:
      name: {{ urldebian }}
      state: present
 # - name: change the bind 
