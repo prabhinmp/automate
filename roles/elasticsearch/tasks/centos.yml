@@ -1,5 +1,5 @@
 ---
- - name: download the logstash 6.3.2 rpm from the official website
+ - name: download the elasticsearch 6.3.2 rpm from the official website
    yum:
      name: https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.3.2.rpm
      state: present
