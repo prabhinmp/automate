@@ -1,7 +1,7 @@
 ---
  - name: download the logstash 6.3.2 rpm from the official website
    yum:
-     name: {{ urlcentos }}
+     name: https://artifacts.elastic.co/downloads/logstash/logstash-6.3.2.rpm
      state: present
 # - name: change the bind 
 #   replace:
