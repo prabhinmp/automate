@@ -1,7 +1,8 @@
 ---
- - hosts: non
-   become: true
-   become_user: root
-   become_method: sudo
+ - hosts: local
+   gather_facts: true
+#   become: true
+#   become_user: root
+#   become_method: sudo
    roles:
-    - java1.8
+    - java

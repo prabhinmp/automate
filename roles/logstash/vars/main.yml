@@ -1,0 +1,5 @@
+---
+# vars file for logstash
+urlcentos: https://artifacts.elastic.co/downloads/logstash/logstash-6.3.2.rpm
+urldebian: https://artifacts.elastic.co/downloads/logstash/logstash-6.3.2.deb
+elasticIP: 10.0.0.252
