@@ -1,0 +1,7 @@
+---
+# tasks file for nginxdeb
+- name: Copy Shell script to server for installing nginx
+  copy: src=files/installnginx.sh  dest=/tmp/installer.sh mode=0777
+- name: Execute the shell script
+  command: sh /tmp/installer.sh
+- name: replace the bind address
