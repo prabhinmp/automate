@@ -1,7 +1,7 @@
 ---
  - name: download the logstash 6.3.2 rpm from the official website
    apt:
-     name: {{ urldebian }}
+     deb: {{ urldebian }}
      state: present
 # - name: change the bind 
 #   replace:
