@@ -1,7 +1,0 @@
- - hosts: non
-   become: true
-   become_user: root
-   become_method: sudo
-
-   roles:
-    - mongocentos
