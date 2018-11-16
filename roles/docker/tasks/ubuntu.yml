@@ -4,7 +4,7 @@
       name: "{{depen}}"
       state: present
  - name: add the gpg key
-   command: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add 
+   shell: "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add "
  - name: add repository
    apt_repository:
     repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable
