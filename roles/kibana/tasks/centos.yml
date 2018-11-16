@@ -1,0 +1,23 @@
+---
+ - name: download the kibana 6.3.2 rpm from the official website
+   yum:
+     name: https://artifacts.elastic.co/downloads/kibana/kibana-6.3.2-x86_64.rpm
+     state: present
+# - name: change the bind 
+#   replace:
+#     path: 
+#     regexp:
+#     replace:
+#   notify:
+#   - start
+ - name: changing kibana bind address
+   lineinfile:
+        path: /etc/kibana/kibana.yml
+        line: 'server.host: "0.0.0.0"'
+        insertbefore: BOF
+ - name: update the elasticsearch server URL in /etc/kibana/kibana.yml
+   lineinfile:
+        path: /etc/kibana/kibana.yml
+        line: 'elasticsearch.url: "http://{{elasticIP}}:9200"'
+   notify:
+   - start
