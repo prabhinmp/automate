@@ -7,7 +7,7 @@
    shell: "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add "
  - name: add repository
    apt_repository:
-    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ansible_distribution_release}} stable
     state: present
     filename: docker.list
  - name: install docker CE in ubuntun server
