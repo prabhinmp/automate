@@ -1,0 +1,6 @@
+---
+# tasks file for presto
+ - name: download presto from the official website
+   get_url:
+     url: "{{ site }}"
+     dest: /opt/presto.tar.gz
