@@ -1,5 +1,0 @@
----
-# handlers file for mongocentos
- - name: start
-   service: name=mongod state=restarted
-

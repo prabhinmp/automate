@@ -1,0 +1,28 @@
+---
+ - name: download the logstash 6.3.2 rpm from the official website
+   apt:
+     deb: https://artifacts.elastic.co/downloads/logstash/logstash-6.3.2.deb
+     state: present
+ - name: change java min options
+   replace:
+     path: /etc/logstash/jvm.options
+     regexp: 'Xms1g'
+     replace: 'Xms3g'
+ - name: change java max options
+   replace:
+     path: /etc/logstash/jvm.options
+     regexp: 'Xmx1g'
+     replace: 'Xmx3g'
+# - name: change the bind 
+#   replace:
+#     path: 
+#     regexp:
+#     replace:
+#   notify:
+#   - start
+ - name: copy logstash.conf file to conf folder
+   template:
+     src: logstash.conf.j2
+     dest: /etc/logstash/conf.d/logstash.conf
+   notify:
+   - start

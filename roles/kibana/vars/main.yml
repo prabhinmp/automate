@@ -1,0 +1,3 @@
+---
+# vars file for kibana
+elasticIP: 10.0.0.252

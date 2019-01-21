@@ -1,0 +1,91 @@
+---
+# tasks file for presto
+ - name: download presto from the official website
+   get_url:
+     url: "{{ site }}"
+     dest: /opt/presto.tar.gz
+ - name: extract presto downloaded
+   unarchive:
+       src: /opt/presto.tar.gz
+       dest: /opt/
+       remote_src: yes
+ - name: remove the archieve file
+   file:
+      path: /opt/presto.tar.gz
+      state: absent
+ - name: rename presto extracted folder
+   stat:
+     path: /opt/presto-server-0.215
+   register: presto_stat
+ - name: move it
+   command: mv /opt/presto-server-0.215  /opt/presto
+   when: presto_stat.stat.exists
+ - name: create data folder under /opt/presto/
+   file: 
+      path: /opt/presto/data
+      state: directory
+ - name: create etc folder under /opt/presto/
+   file: 
+      path: /opt/presto/etc
+      state: directory
+ - name: create catalog directory
+   file:
+      path: /opt/presto/etc/catalog
+      state: directory
+ - name: touch node.properties /opt/presto/etc
+   file:
+     path: /opt/presto/etc/node.properties
+     state: touch
+ - name: touch jvm.config /opt/presto/etc
+   file:
+     path: /opt/presto/etc/jvm.config
+     state: touch
+ - name: touch config.properties /opt/presto/etc
+   file:
+     path: /opt/presto/etc/config.properties
+     state: touch
+ - name: touch log.properties /opt/presto/etc
+   file:
+     path: /opt/presto/etc/log.properties
+     state: touch
+ - name: insert node.properties contents
+   blockinfile:
+      dest: /opt/presto/etc/node.properties
+      block: |
+         node.environment=production
+         node.id=ffffffff-ffff-ffff-ffff-ffffffffffff
+         node.data-dir=/opt/presto/data
+ - name: insert jvm.config contents
+   blockinfile:
+      dest: /opt/presto/etc/jvm.config
+      block: |
+         -server
+         -Xmx13G
+         -XX:+UseG1GC
+         -XX:G1HeapRegionSize=32M
+         -XX:+UseGCOverheadLimit
+         -XX:+ExplicitGCInvokesConcurrent
+         -XX:+HeapDumpOnOutOfMemoryError
+         -XX:+ExitOnOutOfMemoryError
+ - name: insert config properties
+   blockinfile:
+      dest: /opt/presto/etc/config.properties
+      block: |
+         coordinator=true
+         node-scheduler.include-coordinator=true
+         http-server.http.port=8080
+         query.max-memory=5GB
+         query.max-memory-per-node=1GB
+         query.max-total-memory-per-node=2GB
+         discovery-server.enabled=true
+         discovery.uri=http://example.net:8080
+ - name: insert config properties
+   blockinfile:
+      dest: /opt/presto/etc/log.properties
+      block: |
+         com.facebook.presto=INFO
+
+  
+
+  
+

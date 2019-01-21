@@ -1,0 +1,7 @@
+---
+ - name: install openjdk 1.8 using apt
+   apt:
+     name: default-jdk
+     update_cache: yes
+     state: present
+     

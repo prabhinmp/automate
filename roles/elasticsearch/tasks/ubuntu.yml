@@ -1,0 +1,29 @@
+---
+ - name: download the elasticsearch 6.3.2 rpm from the official website
+   apt:
+     deb: https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.3.2.deb
+     state: present
+ - name: change java min options
+   replace:
+     path: /etc/elasticsearch/jvm.options
+     regexp: 'Xms1g'
+     replace: 'Xms3g'
+ - name: change java max options
+   replace:
+     path: /etc/elasticsearch/jvm.options
+     regexp: 'Xmx1g'
+     replace: 'Xmx3g'
+# - name: change the bind 
+#   replace:
+#     path: 
+#     regexp:
+#     replace:
+#   notify:
+#   - start
+ - name: add network host as 0.0.0.0
+   lineinfile:
+        path: /etc/elasticsearch/elasticsearch.yml
+        line: 'network.host: 0.0.0.0'
+        insertbefore: BOF
+   notify:
+   - start
