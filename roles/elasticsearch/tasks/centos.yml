@@ -3,6 +3,16 @@
    yum:
      name: https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.3.2.rpm
      state: present
+ - name: change java min options
+   replace:
+     path: /etc/elasticsearch/jvm.options
+     regexp: 'Xms1g'
+     replace: 'Xms3g'
+ - name: change java max options
+   replace:
+     path: /etc/elasticsearch/jvm.options
+     regexp: 'Xmx1g'
+     replace: 'Xmx3g'
 # - name: change the bind 
 #   replace:
 #     path: 

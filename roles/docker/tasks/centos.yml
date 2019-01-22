@@ -1,0 +1,11 @@
+---
+ - name: copy the repo to target machine
+   copy:
+     src: files/docker-ce.repo
+     dest: /etc/yum.repos.d/docker-ce.repo
+ - name: install docker CE  in target machine
+   yum:
+     name: docker-ce
+     state: present
+   notify:
+   - start

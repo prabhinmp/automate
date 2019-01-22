@@ -1,0 +1,25 @@
+---
+ - name: download the elasticsearch 6.3.2 rpm from the official website
+   apt:
+     deb: https://artifacts.elastic.co/downloads/kibana/kibana-6.3.2-amd64.deb
+     state: present
+# - name: change the bind 
+#   replace:
+#     path: 
+#     regexp:
+#     replace:
+#   notify:
+#   - start
+ - name: add network host as 0.0.0.0
+   lineinfile:
+        path: /etc/kibana/kibana.yml
+        line: 'server.host: "0.0.0.0"'
+        insertbefore: BOF
+ - name: update the elasticsearch server URL in /etc/kibana/kibana.yml
+   lineinfile:
+        path: /etc/kibana/kibana.yml
+        line: 'elasticsearch.url: "http://{{elasticIP}}:9200"'
+   notify:
+   - start
+#server.host: "localhost"
+#elasticsearch.url: "http://localhost:9200"
