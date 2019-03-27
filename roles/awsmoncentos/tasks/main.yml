@@ -1,4 +1,8 @@
 ---
+- name: install unzip 
+  package:
+     name: unzip
+     state: present 
 # tasks file for awsmon
 - name: copy the awsmon python script to server
   copy:
@@ -28,6 +32,7 @@
   copy:
     src: files/cloudwatch.txt
     dest: /etc/cron.d/cloudwatch
+    mode: 644
 - name: restart cron service
   service:
     name: cron
