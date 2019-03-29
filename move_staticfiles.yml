@@ -1,0 +1,35 @@
+---
+ - hosts: rnd_static
+   become: yes
+   become_user: root
+   become_method: sudo
+   vars:
+     deploy_folder: /opt/deploy
+     backup_folder: /opt/backup/html_backup{{ansible_date_time.date}}
+   tasks:
+     - name: take backup of existing html folder
+       stat:
+         path: /opt/backup
+       register: backup_folders
+     - name: create backup folder if not exists
+       file:
+         path: /opt/backup
+         state: directory
+       when: backup_folders.stat.exists == false
+     - name: create today's backup folder
+       file:
+         path: /opt/backup/html_backup{{ansible_date_time.date}}
+         state: directory
+     - name: mv the html folder to backup directory
+       command: mv {{deploy_folder}}/home {{backup_folder}}/home{{ansible_date_time.time}}
+     - name: mv the admin folder to backup directory  
+       command: mv {{deploy_folder}}/admin {{backup_folder}}/admin{{ansible_date_time.time}}
+     - name: copy home folder to deploy folder of nginx server
+       copy:
+         src: /opt/show/static_pages/home
+         dest: "{{deploy_folder}}"
+     - name: copy admin folder to deploy folder of nginx server
+       copy:
+         src: /opt/show/static_pages/admin
+         dest: "{{deploy_folder}}"
+         
